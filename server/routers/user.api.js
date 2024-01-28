@@ -51,7 +51,7 @@ router.post('/register',async ( req ,res ,next) => {
 
     const user = User.findOne({email : email}) ;
     
-    if (user && email != 'admin@gmail.com') return res.status(204).json() ;
+    if (user && email == 'admin@gmail.com') return res.status(204).json() ;
 
     await new User({
         email : email ,
@@ -161,6 +161,16 @@ router.post('/editdatauser',async (req ,res, next) => {
     
     req.session.userdata = await User.findById(_id) ;
     res.status(200).json(req.session.userdata) 
+})
+
+router.delete('/delete_account',async ( req, res, next) => {
+    const {userdata} = req.session ;
+
+    await User.findByIdAndDelete(userdata._id)  ;
+
+    req.session.userdata = null ;
+    res.clearCookie('jwt');
+    res.status(200).json() ;
 })
 module.exports = router
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose') ;
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const userSchema = new mongoose.Schema({
     email : {type : String , unique : true } ,
@@ -8,7 +9,9 @@ const userSchema = new mongoose.Schema({
     address : {type : String , default : ''} ,
     image : {type : String , default : ''} ,
     role : {type : String , default : 'user'} ,
-    cost : {type : String , default : 0} 
+    cost : {type : Number , default : 0} 
 })
+
+userSchema.plugin(mongoosePaginate)
 
 module.exports = mongoose.model('users', userSchema);

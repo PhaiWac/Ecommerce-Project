@@ -49,3 +49,7 @@ app.use('/api/user',UserApi)
 const Api = require("./routers/stock.api") ;
 
 app.use('/api/stock',Api)
+
+const Admin = require('./routers/admin.api') ;
+
+app.use('/api/admin',Admin)

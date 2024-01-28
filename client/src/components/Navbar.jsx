@@ -16,9 +16,10 @@ function Navbar() {
     const getCookie = async () => {
       try {
         const res = await axios.get('http://localhost:3000/api/user/getcookie', { withCredentials: true });
-        console.log(res)
+        // console.log(res)
         if (res.status === 200) {
           setLogin(true);
+          // console.log(res.data)
           setUser(res.data.session)
         } else {
           setLogin(false)
@@ -41,7 +42,7 @@ function Navbar() {
       {name : 'สินค้าทั้งหมด' , link : '/products'} ,
       {name: 'user', dropdown: true, childrens: [
         { name : Userval.role == 'admin' ? 'แอดมิน' : 'ตระกร้า' , link : Userval.role == 'admin' ? '/admin' : '/user/orders'} ,
-        { name: 'แก้ไขโปรไฟล์', link: '/editprofile' },
+        { name: 'แก้ไขโปรไฟล์', link: '/user/editprofile' },
           {
             name: 'ออกจากระบบ', function: async () => {
               await axios.delete('http://localhost:3000/api/user/logout', { withCredentials: true })
